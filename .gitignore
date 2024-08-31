@@ -48,6 +48,10 @@ Packages
 xcuserdata
 DerivedData/
 *.xcodeproj
+*.xcworkspace
+
+### Tuist ###
+Derived
 
 
 ### Xcode ###
