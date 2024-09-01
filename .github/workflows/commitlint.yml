@@ -1,0 +1,35 @@
+name: Commit Lint
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2  # 이전 커밋을 포함한 깊이 설정
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Commitlint
+      run: |
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        echo "$COMMIT_MSG" | npx commitlint
+ 
